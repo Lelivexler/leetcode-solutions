@@ -29,3 +29,7 @@ class Solution:
 
             # Store current number with its index
             d[x] = i
+
+
+# Time Complexity: O(n)
+# Space Complexity: O(n)
