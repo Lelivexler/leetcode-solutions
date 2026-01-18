@@ -1,0 +1,63 @@
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+
+        # --- Solution 1: character count as key ---
+
+        anagrams = {}
+
+        for i in range(len(strs)):
+            # Count frequency of letters a-z
+            count = [0] * 26
+            for j in range(len(strs[i])):
+                count[ord(strs[i][j]) - ord('a')] += 1
+
+            key = tuple(count)
+
+            if key in anagrams:
+                anagrams[key].append(strs[i])
+            else:
+                anagrams[key] = [strs[i]]
+
+        return list(anagrams.values())
+
+
+        # --- Solution 2: cleaner version of the same approach ---
+
+        anagrams = {}
+
+        for s in strs:
+            count = [0] * 26
+            for char in s:
+                count[ord(char) - ord('a')] += 1
+
+            key = tuple(count)
+
+            if key not in anagrams:
+                anagrams[key] = []
+            anagrams[key].append(s)
+
+        return list(anagrams.values())
+
+
+        # --- Solution 3: sorting-based approach ---
+
+        anagrams = {}
+
+        for s in strs:
+            # Sorted string used as dictionary key
+            key = "".join(sorted(s))
+
+            if key in anagrams:
+                anagrams[key].append(s)
+            else:
+                anagrams[key] = [s]
+
+        return list(anagrams.values())
+
+
+        # Time Complexity:
+        # Counting approach: O(n * k)
+        # Sorting approach:  O(n * k log k)
+        #
+        # Space Complexity:
+        # O(n * k)
