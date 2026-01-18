@@ -5,10 +5,10 @@ This repository contains my solutions to LeetCode problems.
 The goal of this repository is to practice problem solving, improve algorithmic thinking, and track my learning progress.
 
 ## Structure
-Problems are organized by topic or problem number.
+Currently solving according to the structure of Netcode 150
 
 ## Languages
-- Python / JavaScript (update according to what you use)
+- Python 
 
 ## Notes
 Solutions are written for learning purposes and may be improved over time.
