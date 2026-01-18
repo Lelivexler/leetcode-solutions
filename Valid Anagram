@@ -1,0 +1,40 @@
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        
+        # --- Solution 1: Hash Map Approach ---
+        # Useful for general Unicode characters
+        if len(s) != len(t):
+            return False
+            
+        count_s, count_t = {}, {}
+        
+        for i in range(len(s)):
+            count_s[s[i]] = count_s.get(s[i], 0) + 1
+            count_t[t[i]] = count_t.get(t[i], 0) + 1
+            
+        return count_s == count_t
+
+        # -------------------------------------------------------
+        # --- Solution 2: Frequency Array Approach (Optimized) ---
+        # More space-efficient for fixed alphabets (a-z)
+        
+        if len(s) != len(t):
+            return False
+        
+        # Create an array of 26 zeros (buckets for 'a' to 'z')
+        count = [0] * 26
+
+        for i in range(len(s)):
+            # Normalize char to index 0-25 using ASCII values
+            count[ord(s[i]) - ord('a')] += 1
+            count[ord(t[i]) - ord('a')] -= 1
+        
+        # Check if all buckets are zero (balanced)
+        for val in count:
+            if val != 0:
+                return False
+                
+        return True
+
+        # Time Complexity: O(n) for both solutions
+        # Space Complexity: O(1) for Solution 2 (Fixed size array), O(n) for Solution 1
