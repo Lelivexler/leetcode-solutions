@@ -1,0 +1,18 @@
+class Solution:
+    def hasDuplicate(self, nums: List[int]) -> bool:
+        
+        # Use a hash map to count occurrences of each number
+        count = {}
+
+        for num in nums:
+            count[num] = count.get(num, 0) + 1
+
+        # If any number appears more than once, duplicates exist
+        for freq in count.values():
+            if freq > 1:
+                return True
+
+        return False
+
+        # Time complexity: O(n)
+        # Space complexity: O(n)
