@@ -7,7 +7,7 @@ The goal of this repository is to practice problem solving, improve algorithmic 
 ## Structure
 Currently solving according to the structure of Netcode 150
 
-## Languages
+## Language
 - Python 
 
 ## Notes
