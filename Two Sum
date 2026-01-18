@@ -1,0 +1,31 @@
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+
+        # --- Solution 1: two-pass hash map ---
+
+        # Map each number to its index
+        d = {}
+        for i, x in enumerate(nums):
+            d[x] = i
+
+        # Check for each number if its complement exists
+        for i in range(len(nums)):
+            val = target - nums[i]
+
+            # Ensure we don't use the same index twice
+            if val in d and d[val] != i:
+                return [i, d[val]]
+
+
+        # --- Solution 2: one-pass hash map ---
+
+        d = {}
+        for i, x in enumerate(nums):
+            val = target - x
+
+            # If complement already seen, return indices
+            if val in d:
+                return [d[val], i]
+
+            # Store current number with its index
+            d[x] = i
