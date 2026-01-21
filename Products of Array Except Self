@@ -1,0 +1,28 @@
+from typing import List
+
+
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        
+        # Result array
+        res = [0] * len(nums)
+
+        # Prefix product (product of elements before index i)
+        prefix = 1
+        for i in range(len(nums)):
+            res[i] = prefix
+            prefix *= nums[i]
+
+        # Suffix product (product of elements after index i)
+        suffix = 1
+        for i in range(len(nums) - 1, -1, -1):
+            res[i] *= suffix
+            suffix *= nums[i]
+
+        return res
+
+        Time Complexity:
+        O(n) — two linear passes over the array.
+
+        Space Complexity:
+        O(n) — Defining a new array to return the result.
