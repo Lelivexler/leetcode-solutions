@@ -1,0 +1,22 @@
+class Solution:
+    def replaceElements(self, arr: List[int]) -> List[int]:
+
+        # Traverse the array from right to left
+        # Keep track of the maximum element seen so far on the right side
+
+        max_right = -1
+
+        for i in range(len(arr) - 1, -1, -1):
+            current = arr[i]
+
+            # Replace the current element with the greatest element to its right
+            arr[i] = max_right
+
+            # Update the maximum value seen so far
+            if current > max_right:
+                max_right = current
+
+        return arr
+
+        # Time complexity: O(n) - the array is traversed only once in a single loop.
+        # Space complexity: O(1) - only one extra variable (max_right) is used, and no additional data structures are created.
