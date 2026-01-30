@@ -1,0 +1,64 @@
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+
+        # stores all unique triplets that sum to zero
+        my_triplets = []
+
+        # sort the array to use two-pointer technique
+        nums.sort()
+
+        # if the smallest number is already greater than zero,
+        # no triplet can sum to zero
+        if nums[0] > 0:
+            return []
+
+        # fix one number and search for the other two
+        for k in range(len(nums)):
+
+            # if the current number is greater than zero,
+            # no further triplets are possible
+            if nums[k] > 0:
+                break
+
+            # skip duplicate values for k to avoid duplicate triplets
+            if k > 0 and nums[k] == nums[k - 1]:
+                continue
+
+            left = k + 1
+            right = len(nums) - 1
+
+            # two-pointer search for remaining two numbers
+            while left < right:
+
+                triplets_sum = nums[k] + nums[left] + nums[right]
+
+                # valid triplet found
+                if triplets_sum == 0:
+                    my_triplets.append([nums[k], nums[left], nums[right]])
+
+                    # skip duplicates for left pointer
+                    while left < right and nums[left] == nums[left + 1]:
+                        left += 1
+
+                    # skip duplicates for right pointer
+                    while left < right and nums[right] == nums[right - 1]:
+                        right -= 1
+
+                    # move both pointers after processing duplicates
+                    left += 1
+                    right -= 1
+
+                # sum is too small → increase it
+                elif triplets_sum < 0:
+                    left += 1
+
+                # sum is too large → decrease it
+                else:
+                    right -= 1
+
+        return my_triplets
+
+
+# Time Complexity: O(n^2) - The outer loop runs n times and the inner two-pointer scan runs in O(n).
+
+# Space Complexity: O(1) - Output list is not counted as extra space.
