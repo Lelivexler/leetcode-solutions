@@ -1,0 +1,32 @@
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+
+        # l = pointer for the buying day (minimum price so far)
+        # r = pointer for the selling day
+        l, r = 0, 1
+
+        # stores the maximum profit found
+        max_value = 0
+
+        # iterate through the prices array once
+        while r < len(prices):
+
+            # if current selling price is higher than buying price
+            if prices[l] < prices[r]:
+                profit = prices[r] - prices[l]
+                # update maximum profit
+                max_value = max(max_value, profit)
+
+            # if a lower price is found, update buying day
+            else:
+                l = r
+
+            # move selling pointer forward
+            r += 1
+
+        return max_value
+
+
+# Time Complexity: O(n) -  The array is traversed only once using two pointers.
+
+# Space Complexity: O(1) - Only constant extra variables are used, no additional data structures.
