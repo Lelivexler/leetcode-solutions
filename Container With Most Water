@@ -1,0 +1,35 @@
+class Solution:
+    def maxArea(self, heights: List[int]) -> int:
+
+        # two pointers starting from both ends
+        left = 0
+        right = len(heights) - 1
+
+        # stores the maximum area found
+        max_amount = 0
+
+        # move pointers toward each other
+        while left < right:
+
+            # height of the container is limited by the shorter line
+            min_height = min(heights[left], heights[right])
+
+            # calculate current area
+            amount = min_height * (right - left)
+
+            # update maximum area
+            max_amount = max(max_amount, amount)
+
+            # move the pointer with the smaller height
+            # because it is the limiting factor
+            if heights[left] <= heights[right]:
+                left += 1
+            else:
+                right -= 1
+
+        return max_amount
+
+
+# Time Complexity: O(n) - Each pointer moves at most n times, so the array is scanned once.
+
+# Space Complexity: O(1) - Only constant extra variables are used.
