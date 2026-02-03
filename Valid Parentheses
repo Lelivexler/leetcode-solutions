@@ -1,0 +1,30 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+
+        # stack to keep track of opening brackets
+        stack = []
+
+        # dictionary that maps closing brackets to their matching opening brackets
+        pairs = {')': '(', ']': '[', '}': '{'}
+
+        # iterate through each character in the string
+        for char in s:
+
+            # if the character is an opening bracket, push it onto the stack
+            if char in pairs.values():
+                stack.append(char)
+
+            # if the character is a closing bracket
+            else:
+                # check if stack is empty or the top of the stack
+                # does not match the current closing bracket
+                if not stack or stack.pop() != pairs[char]:
+                    return False
+
+        # if the stack is empty, all brackets were matched correctly
+        return not stack
+
+
+# Time Complexity: O(n) - The string is traversed once.
+
+# Space Complexity: O(n) - In the worst case, all opening brackets are stored in the stack.
