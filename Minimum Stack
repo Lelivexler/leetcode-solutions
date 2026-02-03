@@ -1,0 +1,38 @@
+class MinStack:
+
+    def __init__(self):
+        # stack to store all values
+        self.stack = []
+
+        # stack to store the minimum value at each level
+        self.min_stack = []        
+
+    def push(self, val: int) -> None:
+        # push the value onto the main stack
+        self.stack.append(val)
+
+        # if the min stack is empty, push the value
+        if not self.min_stack:
+            self.min_stack.append(val)
+        else:
+            # push the minimum between the current value
+            # and the previous minimum
+            self.min_stack.append(min(val, self.min_stack[-1]))
+
+    def pop(self) -> None:
+        # remove the top element from both stacks
+        self.stack.pop()
+        self.min_stack.pop()
+
+    def top(self) -> int:
+        # return the top element of the main stack
+        return self.stack[-1]
+
+    def getMin(self) -> int:
+        # return the current minimum value
+        return self.min_stack[-1]
+
+
+# Time Complexity: push, pop, top, and getMin all run in O(1) time.
+
+# Space Complexity: O(n) - An additional stack is used to store the minimum value for each element.
