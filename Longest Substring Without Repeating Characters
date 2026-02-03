@@ -1,0 +1,38 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+
+        # set to store characters in the current window
+        my_set = set()
+
+        # left = start of the sliding window
+        # right = end of the sliding window
+        left = 0
+        right = 0
+
+        # stores the length of the longest substring without repeating characters
+        longest_sub = 0
+
+        # iterate through the string using a sliding window
+        while right < len(s):
+
+            # if the current character already exists in the set,
+            # shrink the window from the left until it's removed
+            while s[right] in my_set:
+                my_set.remove(s[left])
+                left += 1
+
+            # add the current character to the set
+            my_set.add(s[right])
+
+            # update the maximum length
+            longest_sub = max(longest_sub, right - left + 1)
+
+            # expand the window to the right
+            right += 1
+
+        return longest_sub
+
+
+# Time Complexity: O(n) - Each character is added and removed from the set at most once.
+
+# Space Complexity: O(min(n, k)) - k is the size of the character set (for English letters, at most 26).
