@@ -1,0 +1,36 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        # Stack to store the numbers
+        stack = []
+
+        for token in tokens:
+            if token == "+":
+                # Addition is commutative, so order doesn't matter
+                stack.append(stack.pop() + stack.pop())
+            elif token == "-":
+                # Subtraction is not commutative; b is the second operand
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a - b)
+            elif token == "*":
+                # Multiplication is commutative
+                stack.append(stack.pop() * stack.pop())
+            elif token == "/":
+                # Division order matters; int(a / b) truncates toward zero
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(int(a / b))
+            else:
+                # If token is a number, convert to int and push to stack
+                stack.append(int(token))
+
+        # The final result is the only element left in the stack
+        return stack[0]
+
+
+        #Time Complexity:
+        O(n) — We process each token in the list exactly once.
+
+        #Space Complexity:
+        O(n) — In the worst case (e.g., all numbers followed by operators), 
+        the stack can store up to n elements.
