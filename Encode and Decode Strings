@@ -1,0 +1,34 @@
+class Solution:
+    def encode(self, strs: List[str]) -> str:
+        # Encode a list of strings into a single string.
+        # For each string, prepend its length and a '#' separator.
+        # This allows us to later split the single string unambiguously.
+        
+        newS = []
+        for s in strs:
+            s = str(len(s)) + '#' + s
+            newS.append(s)
+        return "".join(newS)
+        # Time complexity: O(n) where n is the total number of characters in all strings
+        # Space complexity: O(n) for storing the encoded string
+
+    def decode(self, s: str) -> List[str]:
+        # Decode a single string back into a list of strings.
+        # Read the length before each '#' to know how many characters to extract.
+        
+        res = []
+        i = 0
+        while i < len(s):
+            # Read the number representing the length until '#'
+            j = i
+            while s[j] != '#':
+                j += 1
+            length = int(s[i:j])
+            j += 1  # Skip the '#'
+            # Extract the substring of the given length
+            res.append(s[j:j + length])
+            i = j + length  # Move to the start of the next encoded string
+
+        return res
+        # Time complexity: O(n) where n is the length of the encoded string
+        # Space complexity: O(n) for storing the decoded list of strings
